@@ -1,3 +1,5 @@
+# !!! EXPERIMENTAL - use at your own risk !!!
+
 # Initial raspbian setup
 
 1. Install debmirror
