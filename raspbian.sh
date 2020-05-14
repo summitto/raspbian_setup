@@ -22,6 +22,20 @@ fi
 # unzip downloaded zipped image
 unzip /tmp/raspbian_setup/$IMAGE_NAME.zip -d /tmp/raspbian_setup/
 
+
+# download boost image
+BOOST_DOT_VERSION="1.72.0"
+BOOST_VERSION="1_72_0"
+
+curl https://dl.bintray.com/boostorg/release/${BOOST_DOT_VERSION}/source/boost_${BOOST_VERSION}.tar.bz2 -L -C - -o -s /tmp/boost_$BOOST_VERSION.tar.bz2
+
+# verify that correct file was downloaded
+if [[ "$(sha256sum /tmp/boost_${BOOST_VERSION}.tar.bz2 | while read -a array; do echo "${array[0]}" ; done)" != "59c9b274bc451cf91a9ba1dd2c7fdcaf5d60b1b3aa83f2c9fa143417cc660722" ]]
+then 
+  echo "downloaded boost file failed checksum verification, exiting..."
+  exit 1
+fi
+
 # extract partition table information of the image
 while read -a array; do 
   # extract sector size
@@ -43,6 +57,9 @@ sudo mount -o loop,offset=$(($SECTOR_START*$SECTOR_SIZE)) /tmp/raspbian_setup/$I
 # move pgp libraries to pi
 sudo mv /tmp/raspbian_setup/pgp-key-generation $IMAGE_NAME/home/pi
 sudo mv /tmp/raspbian_setup/pgp-packet-library $IMAGE_NAME/home/pi
+
+# extract the boost libraries to pi
+tar --bzip2 -xf /tmp/boost_${BOOST_VERSION}.tar.bz2 -C $IMAGE_NAME/home/pi
 
 # Replace existing apt sources by local source list
 echo "deb file:///mnt/usb/debian/ $DIST main contrib non-free" | sudo tee $IMAGE_NAME/etc/apt/sources.list > /dev/null
