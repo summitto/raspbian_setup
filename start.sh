@@ -3,11 +3,11 @@ sudo apt -y install /mnt/usb/debian/pool/main/d/debian-keyring/debian-keyring_20
 sudo apt -y install /mnt/usb/debian/pool/main/d/debian-archive-keyring/debian-archive-keyring_2019.1_all.deb
 sudo apt -y update --fix-missing
 sudo apt -y upgrade
-sudo apt -y install cmake libcrypto++-dev git libsodium-dev clang++-9 clang-9
+sudo apt -y install cmake libcrypto++-dev git libsodium-dev g++-8 gcc-8
 
 # set the default compiler version
-sudo update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang++-9 100
-sudo update-alternatives --install /usr/bin/cc cc /usr/bin/clang-9 100
+sudo update-alternatives --install /usr/bin/c++ c++ /usr/bin/g++-8 100
+sudo update-alternatives --install /usr/bin/cc cc /usr/bin/gcc-8 100
 
 # install boost
 BOOST_VERSION="1_72_0"
