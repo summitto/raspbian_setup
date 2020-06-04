@@ -10,7 +10,7 @@ git clone --recurse-submodules git@github.com:summitto/pgp-packet-library.git /t
 # download raspbian image
 IMAGE_NAME="2019-07-10-raspbian-buster-lite"
 DIST="buster"
-curl http://director.downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2019-07-12/$IMAGE_NAME.zip -C - -o -s /tmp/raspbian_setup/$IMAGE_NAME.zip
+curl http://director.downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2019-07-12/$IMAGE_NAME.zip -C - -s -o /tmp/raspbian_setup/$IMAGE_NAME.zip
 
 # verify that correct image was downloaded
 if [[ "$(sha256sum /tmp/raspbian_setup/$IMAGE_NAME.zip | while read -a array; do echo "${array[0]}" ; done)" != "9e5cf24ce483bb96e7736ea75ca422e3560e7b455eee63dd28f66fa1825db70e" ]]

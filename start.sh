@@ -11,6 +11,10 @@ rm -rf ~/.gnupg
 # create symlink to ramdisk
 ln -fs ~/ramdisk/.gnupg ~/.gnupg
 
+# ensure permissions are set correctly
+find ~/ramdisk/ -type d -print0 | xargs -0 chmod 700
+find ~/ramdisk/ -type f -print0 | xargs -0 chmod 600
+
 # build pgp library and utility
 mkdir -p ~/pgp-packet-library/build
 cd ~/pgp-packet-library/build && cmake .. && make && sudo make install
