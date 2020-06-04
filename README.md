@@ -23,7 +23,11 @@
 
     /etc/default/keyboard  
 
-6. Execute start script to install all required packages
+6. Adjust the date settings to your liking:
+
+    sudo date -s "1 JAN 2020 00:00:01"  
+
+7. Execute start script to install all required packages
 
     chmod +x start.sh && ./start.sh
 
