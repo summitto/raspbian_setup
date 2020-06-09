@@ -45,7 +45,7 @@ sudo mv /tmp/raspbian_setup/pgp-key-generation $IMAGE_NAME/home/pi
 sudo mv /tmp/raspbian_setup/pgp-packet-library $IMAGE_NAME/home/pi
 
 # Replace existing apt sources by local source list
-echo "deb file:///mnt/usb/debian/ $DIST main contrib non-free" | sudo tee $IMAGE_NAME/etc/apt/sources.list > dev/null
+echo "deb file:///mnt/usb/debian/ $DIST main contrib non-free" | sudo tee $IMAGE_NAME/etc/apt/sources.list > /dev/null
 
 # copy startup script to pi
 cp start.sh $IMAGE_NAME/home/pi/
