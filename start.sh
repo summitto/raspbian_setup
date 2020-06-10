@@ -5,6 +5,11 @@ sudo apt -y update --fix-missing
 sudo apt -y upgrade
 sudo apt -y install cmake libboost-dev libcrypto++-dev git libsodium-dev libboost-program-options-dev
 
+# because there is a mismatch between the gpg-agent version installed on
+# Raspbian Buster (= 2.2.12-1+rpi1) and the gpg-agent version (= 2.2.12-1)
+# which is required by scdaemon, we force install this package manually
+dpkg --force-all -i /mnt/usb/debian/pool/main/g/gnupg2/scdaemon_2.2.12-1_armhf.deb
+
 # remove existing gnupg folder
 rm -rf ~/.gnupg
 
@@ -21,3 +26,5 @@ cd ~/pgp-packet-library/build && cmake .. && make && sudo make install
 mkdir -p ~/pgp-key-generation/build
 cd ~/pgp-key-generation/build && cmake .. && make
 
+# add build directories to path
+export "~/pgp-key-generation/build/generate_derived_key:~/pgp-key-generation/build/extend_key_expiry:$PATH"

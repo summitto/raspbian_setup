@@ -29,7 +29,7 @@
 
 7. Execute start script to install all required packages
 
-    chmod +x start.sh && ./start.sh
+    chmod +x start.sh && . ./start.sh
 
 # Upgrading to new debian version
 
